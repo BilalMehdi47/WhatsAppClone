@@ -22,7 +22,8 @@ final class MessgageListController: UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-     //   tableView.backgroundColor = .red
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.gray.withAlphaComponent(0.4)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -48,19 +49,26 @@ extension MessgageListController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return MessageItem.stubMessages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+        cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        let message = MessageItem.stubMessages[indexPath.row]
+        
         cell.contentConfiguration = UIHostingConfiguration {
-            Text("Placeholder")
-                .font(.largeTitle)
-                .bold()
-                .frame(maxWidth: .infinity)
-                .frame(height: 200)
-                .background(Color.gray.opacity(0.1))
+            
+            switch message.type{
+                
+            case .text:
+                BubbleTextView(item: message)
+            case .video, .photo:
+                BubbleImageView(item: message)
+            case .audio:
+                BubbleAudioView(item: message)
+            }
         }
         return cell
     }
@@ -68,4 +76,9 @@ extension MessgageListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+}
+
+
+#Preview {
+    MesssageListView()
 }
