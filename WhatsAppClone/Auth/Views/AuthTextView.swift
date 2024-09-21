@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct AuthTextView: View {
+    
+    @Binding var text : String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Image(systemName: "envelope")
+                .fontWeight(.semibold)
+                .frame(width: 30)
+            
+            TextField("Emaiol", text: $text)
+        }
+        .foregroundStyle(.white)
+        .padding()
+        .background(Color.white.opacity(0.3))
     }
 }
 
 #Preview {
-    AuthTextView()
+    ZStack {
+        Color.teal
+        AuthTextView(text: .constant(""))
+    }
 }
