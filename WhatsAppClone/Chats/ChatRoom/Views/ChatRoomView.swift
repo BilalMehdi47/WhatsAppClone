@@ -9,18 +9,6 @@ import SwiftUI
 
 struct ChatRoomView: View {
     var body: some View {
-//        ScrollView {
-//            LazyVStack {
-//                ForEach(0 ..< 12) { _ in
-//                    Text("placeholder")
-//                        .font(.largeTitle)
-//                        .bold()
-//                        .frame(maxWidth: .infinity)
-//                        .frame(height: 200)
-//                        .background(Color.gray.opacity(0.1))
-//                }
-//            }
-//        }
         
         MesssageListView()
         
@@ -31,6 +19,7 @@ struct ChatRoomView: View {
             
             trailingNavItem()
         }
+        .navigationBarTitleDisplayMode(.inline)
         .safeAreaInset(edge: .bottom) {
             TextInputView()
         }

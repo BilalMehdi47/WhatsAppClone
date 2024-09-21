@@ -11,6 +11,8 @@ struct MainTabView: View {
     
     init() {
         makeTabBarOpaque()
+        let thumbImage = UIImage(systemName: "circle.fill")
+        UISlider.appearance().setThumbImage(thumbImage, for: .normal)
     }
     
     var body: some View {
@@ -40,7 +42,7 @@ struct MainTabView: View {
                     }
                 }
             
-            placeholderItemView("Chats")
+            ChatView()
                 .tabItem {
                     VStack {
                         Image(systemName: "message")
@@ -48,7 +50,7 @@ struct MainTabView: View {
                     }
                 }
             
-            placeholderItemView("Profile")
+            SettingsView()
                 .tabItem {
                     VStack {
                         Image(systemName: "gear")

@@ -8,22 +8,44 @@
 import SwiftUI
 
 struct SettingItemView: View {
+    
+    let item: SettingsItem
+    
     var body: some View {
         HStack {
-            Image(systemName: "info.bubble.fill")
-                .padding(3)
-                .foregroundStyle(.white)
-                .background(Color.blue)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
             
-            Text("Change Profile Photo")
+            imageIcon()
+                .frame(width: 30, height: 30)
+                .foregroundStyle(.white)
+                .background(item.backgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+   
+            
+            Text(item.title)
                 .font(.system(size: 18))
             
-            Spacer
+            Spacer()
         }
+    }
+    
+    @ViewBuilder
+    private func imageIcon() -> some View {
+        
+        switch item.imageType {
+        case .systemImage:
+            Image(systemName: item.imageName)
+                .bold()
+                .font(.callout)
+        case .assetImage:
+            Image(item.imageName)
+                .renderingMode(.template)
+                .padding(3)
+        }
+        
+
     }
 }
 
 #Preview {
-    SettingItemView()
+    SettingItemView(item: .avatar)
 }
